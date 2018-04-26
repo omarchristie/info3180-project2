@@ -121,7 +121,6 @@ def logout():
     g.current_user = None
     session.pop('userid', None)
     return jsonify(message = "logout")
- #KYZER WAS ERE DOING FUCKRY
  
 @app.route('/test/', methods=["GET", "POST"])
 def test():
@@ -140,8 +139,12 @@ def get_all_posts():
     output = []
     for post in posts:
         user = Users.query.filter_by(id = post.userID).first()
-        #like = Likes.query.filter
-        posted= {"userid": post.userID, "username": user.username, "pro_photo": user.proPhoto, "photo": post.photo, "caption": post.caption, "created_on": post.created_on}
+        numberlikes = Likes.query.filter_by(postID = post.id).all()
+        numberoflikes=[];
+        for number in numberlikes:
+            num = {'test': "counted"}
+            numberoflikes.append(num)
+        posted= {"postid":post.id,"userid": post.userID, "username": user.username, "pro_photo": user.proPhoto, "photo": post.photo, "caption": post.caption, "created_on": post.created_on, "likes": numberoflikes}
         output.append(posted)
     return jsonify(data= output)
 
@@ -228,19 +231,13 @@ def create_follow(user_id):
 @app.route('/api/users/<post_id>/like',methods=["POST"])
 @requires_auth
 def create_like(post_id):
-    post = Posts.query.filter_by(post_id).first()
-    
-    if not post:
-        return jsonify({'message':'post does not exist'})
-        
-    user_id = g.current_user['id']
-    post_id = post
-    like = Likes(userID = user_id, postID = post_id)
-    db.session.add(like)
-    db.session.commit(like)
-    
-    total_likes = len(Likes.query.filter_by(postid = post_id).all())
-    return jsonify ({'message': 'You liked a user post','likes':total_likes})
+    likecheck = Likes.query.filter_by(userID=session['userid'], postID=post_id).first()
+    if(likecheck is None):
+        like = Likes(userID = session['userid'], postID = post_id)
+        db.session.add(like)
+        db.session.commit()
+        return jsonify (message= 'You like a post')
+    return jsonify (DB= 'Already liked post')
     
 
 

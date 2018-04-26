@@ -18,8 +18,14 @@ body
 
 .fix-register
 {
-    padding-left:45%;
-    padding-right:15%;
+    padding-left:35%;
+    padding-right:35%;
+}
+
+.fix-login
+{
+    padding-left:35%;
+    padding-right:35%;
 }
 
 .fix-profile
@@ -187,7 +193,12 @@ p
 #pro_info
 {
     text-align: left;
-    font-family: "Verdana", Sans-serif;
+    padding-top: 20px;
+    font-size: 1rem;
+}
+#pro_date
+{
+    font-size: 1rem;
 }
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 		display: block;
@@ -214,7 +225,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 .sidenav {
     height: 100%;
-    width: 160px;
+    width: 400px;
     float:right;
     z-index: 1;
     top: 0;
@@ -377,7 +388,7 @@ a.post_div
 .profiles-container
 {
     width: 100%;
-    height: 200px;
+    height: 300px;
 }
 
 .view-profile a
@@ -417,17 +428,50 @@ a.post_div
 }
 
 .profile_post {
-    width: 293px;
-    height: 293px;
+    width: 459px;
+    height: 459px;
 }
 
 .post_pic
 {
-    width: 12rem;
+    width: 15rem;
     height: 100%;
 }
 
 .card-text
 {
     text-align:center;
+}
+
+.pro-btn
+{
+    padding-top:50px;
+}
+
+.pro-style
+{
+    color: white !important; 
+    width: 20rem; 
+    height: 3rem;
+    font-size: 1.9rem;
+}
+.follow_count
+{
+    font-size: 1.9rem;
+}
+
+.follow_title
+{
+    padding-right: 75px;
+    color: grey;
+}
+
+.post_len
+{
+    padding-left: 25px;
+}
+
+.follow_len
+{
+    padding-left: 165px;
 }

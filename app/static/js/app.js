@@ -231,10 +231,10 @@ const loginform= Vue.component('login-form', {
     template: `
     <div class="fix-login">
       <h2>Login</h2>
-      <li v-for="resp in error"class="list alert alert-danger">
+      <li v-for="resp in error" class="list alert alert-danger">
                 {{resp.errors[0]}} <br>
                 {{resp.errors[1]}} <br>
-            </li>
+     </li>
       <div class="layout border-style">
         <form id="loginforms" @submit.prevent="loginuser" method="POST" >
             <div class="row">
@@ -294,7 +294,6 @@ const loginform= Vue.component('login-form', {
                     let userid = jsonResponse.data.userid;
                     localStorage.setItem('token', jwt_token);
                     localStorage.setItem('userid', userid);
-                    alert("User login successfully");
                     self.$router.push('/explore');
                 }
                 })
@@ -314,9 +313,9 @@ const profilepage= Vue.component('profile-form', {
                     <a href="#"><img v-bind:src= "'/static/uploads/'+user.photo" class="post_pic"></a>
                         <div class="col">
                             <h2><strong>{{user.firstname}} {{user.lastname}}</strong></h2>
-                            <h5><span id="pro_info">{{ user.location}}</span></h5>
-                            <span id="pro_info"> Member since: {{ user.joined_on}}</span>
-                            <span id="pro_info">{{ user.biography}}</span>
+                            <h5 id="pro_info"><span>{{ user.location}}</span></h5>
+                            <h5 id="pro_date"><span> Member since: {{ user.joined_on}}</span></h5>
+                            <h5 id="pro_info"><span>{{ user.biography}}</span></h5>
                         </div>
                     <div class="view-profile center col-3 bio">
                         </br>
@@ -576,7 +575,7 @@ const profilepage= Vue.component('profile-form', {
                 'X-CSRFToken': token
             },
             credentials: 'same-origin'
-        })
+            })
             .then(function (response) {
             return response.json();
             })
@@ -584,9 +583,11 @@ const profilepage= Vue.component('profile-form', {
             // display a success message
             console.log(jsonResponse);
             if(jsonResponse.message){
-                let message = jsonResponse.message
+                let message = jsonResponse.message;
                 alert(message);
                 self.following = true;
+            }else{
+                alert("Failed to follow user");
             }
             })
             .catch(function (error) {
@@ -700,7 +701,7 @@ const explorepage= Vue.component('explore-form', {
     							<p class="caption"><strong style="color:black;">{{resp.username}}</strong> {{resp.caption}}</p>
     						</article>
     						<section class="like like_8oo9w">
-                                <a class="like_eszkz like_l9yih nohover" href="#" role="button"><span class="span_8scx2 coreSpriteHeartOpen">Likes</span></a>
+                                <a class="like_eszkz like_l9yih nohover" @click="likepost(resp.postid)"><span class="span_8scx2 coreSpriteHeartOpen">{{resp.likes.length}}Likes</span></a>
                                 <a class="like_eszkz like_et4ho nohover" href="#"><span class="span_8scx2 coreSpriteHeartOpen2">28 Apr 2018</span></a>
                             </section>
     					</div>
@@ -715,6 +716,12 @@ const explorepage= Vue.component('explore-form', {
         </div>
     </div>
     `,
+     watch: {
+         
+        'trigger' (newvalue, oldvalue){
+            this.reload();
+        }
+      },
     created: function() {
         let self = this;
         fetch("/api/posts/", { 
@@ -732,8 +739,9 @@ const explorepage= Vue.component('explore-form', {
             // display a success message
             console.log(jsonResponse);
             if(jsonResponse.data){
-                self.output = jsonResponse.data
+                self.output = jsonResponse.data;
                 self.messageFlag = true;
+                self.trigger = false;
             }
             })
             .catch(function (error) {
@@ -744,8 +752,68 @@ const explorepage= Vue.component('explore-form', {
        return {
            output: [],
            error: [],
-           messageFlag: false
+           messageFlag: false,
+           trigger: null,
        };
+    },
+    methods: {
+        reload(){
+            let self = this;
+        fetch("/api/posts/", { 
+            method: 'GET',
+            'headers': {
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                'X-CSRFToken': token
+            },
+            credentials: 'same-origin'
+        })
+            .then(function (response) {
+            return response.json();
+            })
+            .then(function (jsonResponse) {
+            // display a success message
+            console.log(jsonResponse);
+            if(jsonResponse.data){
+                self.output = jsonResponse.data;
+                self.messageFlag = true;
+                self.trigger = false;
+            }
+            })
+            .catch(function (error) {
+            console.log(error);
+        });
+        },
+        likepost(post_id) {
+            let self = this;
+            fetch("/api/users/"+post_id+"/like", { 
+            method: 'POST',
+            'headers': {
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                'X-CSRFToken': token
+            },
+            credentials: 'same-origin'
+        })
+            .then(function (response) {
+            return response.json();
+            })
+            .then(function (jsonResponse) {
+            // display a success message
+            console.log(jsonResponse);
+            if(jsonResponse.message){
+                let message = jsonResponse.message;
+                alert(message);
+                self.trigger = true;
+            }else if(jsonResponse.DB){
+                let DB = jsonResponse.DB;
+                alert(DB);
+            }else{
+                alert("Failed to like post");
+            }
+            })
+            .catch(function (error) {
+            console.log(error);
+            });
+        }
     }
 });
 
