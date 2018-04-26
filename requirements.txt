@@ -1,14 +1,19 @@
 # ----------------------
 # Flask
 # ----------------------
+click==6.7
 flask
-Flask-WTF
+Flask-WTF==0.14.2
+itsdangerous==0.24
 Flask-SQLAlchemy
 Flask-Migrate
-Flask-Login
 psycopg2
 Flask-Script
+pyjwt
+Werkzeug==0.11.15
+WTForms==2.1
+Jinja2==2.9.4
 # ----------------------
 # Production Server
 # ----------------------
-gunicorn
+gunicorn==19.6.0

@@ -1,3 +1,433 @@
-body {
+body 
+{
     padding-top: 5rem;
+    background-color: rgb(245,239,230);
+    
+}
+
+
+.layout
+{
+    padding-top: 30px;
+    padding-bottom:30px;
+    background-color: white;
+    border-radius: 5px;
+    border-top-color: #0080ff;
+    box-shadow: 0px 2px 8px grey;
+}
+
+.fix-register
+{
+    padding-left:45%;
+    padding-right:15%;
+}
+
+.fix-profile
+{
+    padding-left:26.2%;
+}
+
+.fix-grid
+{
+    padding-left:25%;
+    padding-right:15%;
+}
+
+.li_grid
+{
+     list-style-type: none;
+     padding:15px;
+}
+.fix-explore
+{
+    padding-left:30%;
+}
+
+form
+{
+    padding-left: 10%;
+}
+
+.form_title
+{
+    width: 45%;
+    margin-bottom: 1%;
+    font-weight: bold;
+    padding-bottom: 20px;
+    
+}
+
+.custom-file-upload 
+{
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 20%;
+    text-align: center;
+}
+
+.photo
+{
+    padding-left: 15px;
+}
+
+.label_bold
+{
+  font-weight: bold; 
+  font-size:1.5em;
+}
+
+.upload-btn-wrapper input[type=file] 
+{
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.upload-btn-wrapper 
+{
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.upload-btn
+{
+  color: white;
+}
+
+#btn 
+{
+  border: 2px solid black;
+  color: black;
+  background-color: white;
+  padding: 3px 45px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  width:100%;
+}
+.form-space
+{
+    padding-bottom: 25px;
+}
+
+.btn-login
+{
+  background-color: rgb(126,211,33);
+  color: white;
+  width: 100%;
+}
+
+#login-form
+{
+  padding-left: 35px;
+}
+
+#registerForm
+{
+  padding-left: 35px;
+}
+
+.landing-container{
+    text-align: center;
+    margin: 15% 0%;
+}
+
+.landing-container-child{
+    float: left;
+    width: 100%;
+}
+
+
+.float-clear{
+    clear: both;
+}
+
+#landing-img
+{
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+}
+
+ul ,li
+{
+ list-style-type: none;
+}
+
+#message
+{
+    list-style-type: none;
+    padding-right:30px;
+}
+
+.caption
+{
+    text-align: left;
+    font-family: "Verdana", Sans-serif;
+    color: grey;
+    padding-left:10px;
+    padding-top: 8px;
+}
+
+p
+{
+    text-align: left;
+    font-family: "Verdana", Sans-serif;
+    padding-left:10px;
+    padding-top: 8px;
+}
+
+#pro_info
+{
+    text-align: left;
+    font-family: "Verdana", Sans-serif;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+		display: block;
+	}
+
+#wrapper {
+    width: 64em;
+    margin: 0 auto;
+    max-width: calc(100% - 4em);
+    padding: 4em 0 2em 0;
+}
+
+.item {
+    background-color: #ffffff;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.foot-right
+{
+  float: right;
+  padding:5px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 160px;
+    float:right;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 60px;
+    padding-left: 50px;
+}
+
+.sidenav a {
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+.post-box
+{
+    position: relative;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    width: 33rem;
+    box-shadow: 0px 2px 8px grey;
+    border-radius: 3px;
+}
+
+.like-heart 
+{
+    display: block;
+    overflow: hidden;
+    text-indent: 110%;
+    white-space: nowrap;
+}
+
+.like
+{
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.like_8oo9w {
+    margin-top: 4px;
+}
+
+.like_eszkz {
+    margin-left: -8px;
+    display: inline-block;
+}
+
+
+.like_l9yih {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 8px;
+    padding-left: 20px;
+}
+
+.span_8scx2 {
+    display: block;
+    text-indent: 110%;
+    white-space: nowrap;
+    color: grey;
+}
+
+.coreSpriteHeartOpen
+{
+    height: 24px;
+    width: 24px;
+    background-image: url(../../static/images/like_heart.png);
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+}
+
+.coreSpriteHeartOpen2
+{
+    height: 24px;
+    width: 24px;
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+}
+
+.like_et4ho {
+    background-color: transparent;
+    border: 0;
+    padding: 8px;
+    padding-left: 350px;
+}
+
+.nohover a:hover
+{ 
+    background-color: transparent; 
+
+}
+
+a
+{
+    text-decoration: none !important;
+}
+
+a.post_div
+{
+    display:none;
+}
+
+.pro_pic
+{
+    width:90px;
+    height:90px;
+}
+
+.blk
+{
+    display: block;
+}
+
+.pro-data
+{
+    max-width: 30%;
+}
+
+.view-btn
+{
+    height: 30px;
+    width: 150px;
+    text-align: center;
+    border-radius: 7px;
+    color: white;
+}
+
+.profile
+{
+    margin-left: 15px;
+    width: 45%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 5px;
+    margin-bottom: 1%;
+    box-shadow: 0px 2px 8px grey;
+}
+
+.profiles-container
+{
+    width: 100%;
+    height: 200px;
+}
+
+.view-profile a
+{
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
+.form-container
+{
+    margin: 0 auto;
+    padding: 5px;
+    width: 45%;
+    background-color: white;
+}
+
+.border-style
+{
+    border-radius: 3px;
+    border-top: 3px #007bff solid;
+}
+
+.title
+{
+    margin: 0 auto;
+    width: 45%;
+    margin-bottom: 1%;
+    font-weight: bold;
+}
+
+.imageView
+{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-row-gap:  3px;
+}
+
+.profile_post {
+    width: 293px;
+    height: 293px;
+}
+
+.post_pic
+{
+    width: 12rem;
+    height: 100%;
+}
+
+.card-text
+{
+    text-align:center;
 }
