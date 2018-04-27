@@ -144,7 +144,8 @@ def get_all_posts():
         for number in numberlikes:
             num = {'test': "counted"}
             numberoflikes.append(num)
-        posted= {"postid":post.id,"userid": post.userID, "username": user.username, "pro_photo": user.proPhoto, "photo": post.photo, "caption": post.caption, "created_on": post.created_on, "likes": numberoflikes}
+        postdate= post.created_on.strftime("%d %b %Y");
+        posted= {"postid":post.id,"userid": post.userID, "username": user.username, "pro_photo": user.proPhoto, "photo": post.photo, "caption": post.caption, "created_on": postdate, "likes": numberoflikes}
         output.append(posted)
     return jsonify(data= output)
 
@@ -193,11 +194,12 @@ def get_user(user_id):
     output = []
     # output list to hold dictionary
     if (int(user_id) == session['userid']):
-        info= {"userid": user.id, "username": user.username, "firstname": user.firstname, "lastname": user.lastname, "email": user.email, "location": user.location, "biography": user.biography,"photo": user.proPhoto, "joined_on": user.joined_on}
+        join= user.joined_on.strftime("%B %Y");
+        info= {"userid": user.id, "username": user.username, "firstname": user.firstname, "lastname": user.lastname, "email": user.email, "location": user.location, "biography": user.biography,"photo": user.proPhoto, "joined_on": join}
         output.append(info)
         return jsonify(profile = output, isuser=True)
-    
-    info= {"userid": user.id, "username": user.username, "firstname": user.firstname, "lastname": user.lastname, "email": user.email, "location": user.location, "biography": user.biography,"photo": user.proPhoto, "joined_on": user.joined_on}
+    join= user.joined_on.strftime("%B %Y");
+    info= {"userid": user.id, "username": user.username, "firstname": user.firstname, "lastname": user.lastname, "email": user.email, "location": user.location, "biography": user.biography,"photo": user.proPhoto, "joined_on": join}
     output.append(info)
     return jsonify(profile= output)
     

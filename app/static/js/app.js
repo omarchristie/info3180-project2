@@ -97,7 +97,7 @@ const register= Vue.component('register-form', {
         <div class="fix-register">
         <h2>Register</h2>
         <div class="layout border-style">
-        <ul class="list">
+        <ul id="message" class="list">
             <li v-for="resp in error"class="list alert alert-danger">
                 {{resp.errors[0]}} <br>
                 {{resp.errors[1]}} <br>
@@ -231,11 +231,13 @@ const loginform= Vue.component('login-form', {
     template: `
     <div class="fix-login">
       <h2>Login</h2>
-      <li v-for="resp in error" class="list alert alert-danger">
-                {{resp.errors[0]}} <br>
-                {{resp.errors[1]}} <br>
-     </li>
       <div class="layout border-style">
+        <ul id="message" class="list">
+          <li v-for="resp in error" class="list alert alert-danger">
+                    {{resp.errors[0]}} <br>
+                    {{resp.errors[1]}} <br>
+         </li>
+        </ul>
         <form id="loginforms" @submit.prevent="loginuser" method="POST" >
             <div class="row">
                 <div class="col-md-11">
@@ -702,7 +704,7 @@ const explorepage= Vue.component('explore-form', {
     						</article>
     						<section class="like like_8oo9w">
                                 <a class="like_eszkz like_l9yih nohover" @click="likepost(resp.postid)"><span class="span_8scx2 coreSpriteHeartOpen">{{resp.likes.length}}Likes</span></a>
-                                <a class="like_eszkz like_et4ho nohover" href="#"><span class="span_8scx2 coreSpriteHeartOpen2">28 Apr 2018</span></a>
+                                <a class="like_eszkz like_et4ho nohover" href="#"><span class="span_8scx2 coreSpriteHeartOpen2">{{resp.created_on}}</span></a>
                             </section>
     					</div>
 					</section>

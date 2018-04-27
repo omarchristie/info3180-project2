@@ -6,11 +6,11 @@ from flask_wtf.file import FileField, FileAllowed, FileRequired
 
 
 class LoginForm(FlaskForm):
-    userName = StringField('Username', validators=[InputRequired()])
-    password = PasswordField('Password', validators=[InputRequired()])
+    userName = StringField('Username', validators=[InputRequired(message='Enter username')])
+    password = PasswordField('Password', validators=[InputRequired(message='Enter password')])
     
 class RegistrationForm(FlaskForm):
-    userName= StringField('Username', validators=[InputRequired()])
+    userName= StringField('Username', validators=[InputRequired(message='Enter firstname')])
     password= PasswordField('Password', validators=[InputRequired()])
     firstName=StringField('FirstName', validators=[InputRequired()])
     lastName=StringField('LastName', validators=[InputRequired()])
