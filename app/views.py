@@ -107,6 +107,9 @@ def login():
         password = request.form['password']
         
         user = Users.query.filter_by(username=userName, password=password).first()
+        if user is None:
+            return jsonify(errorm="Incorrect username or password")
+            
         payload = {'user_id' : user.id}
         token = jwt.encode(payload, token_key)
         session['userid'] = user.id;
@@ -144,8 +147,13 @@ def get_all_posts():
         for number in numberlikes:
             num = {'test': "counted"}
             numberoflikes.append(num)
+        didlike = Likes.query.filter_by(userID=session['userid'], postID= post.id).first()
+        if(didlike is None):
+            likeflag = False
+        else:
+            likeflag = True
         postdate= post.created_on.strftime("%d %b %Y");
-        posted= {"postid":post.id,"userid": post.userID, "username": user.username, "pro_photo": user.proPhoto, "photo": post.photo, "caption": post.caption, "created_on": postdate, "likes": numberoflikes}
+        posted= {"postid":post.id,"userid": post.userID, "username": user.username, "pro_photo": user.proPhoto, "photo": post.photo, "caption": post.caption, "created_on": postdate, "likes": numberoflikes, "likeflag": likeflag}
         output.append(posted)
     return jsonify(data= output)
 

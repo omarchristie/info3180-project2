@@ -44,10 +44,6 @@ body
      list-style-type: none;
      padding:15px;
 }
-.fix-explore
-{
-    padding-left:30%;
-}
 
 form
 {
@@ -263,7 +259,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
-    width: 33rem;
+    width: 50rem;
+    min-width: 40;
     box-shadow: 0px 2px 8px grey;
     border-radius: 3px;
 }
@@ -313,7 +310,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 {
     height: 24px;
     width: 24px;
-    background-image: url(../../static/images/like_heart.png);
+    background-image: url(../../static/images/heart2.png);
     background-repeat: no-repeat;
     background-size: 24px 24px;
 }
@@ -322,6 +319,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 {
     height: 24px;
     width: 24px;
+    background-image: url(../../static/images/heart3.png);
     background-repeat: no-repeat;
     background-size: 24px 24px;
 }
@@ -330,7 +328,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     background-color: transparent;
     border: 0;
     padding: 8px;
-    padding-left: 350px;
+    padding-left: 561px;
 }
 
 .nohover a:hover

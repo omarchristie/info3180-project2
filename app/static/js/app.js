@@ -1,4 +1,7 @@
-/* Add your Application JavaScript */
+
+/*
+    HEADER COMPONENT
+*/
 Vue.component('app-header', {
     template: `
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
@@ -54,6 +57,9 @@ Vue.component('app-header', {
     }
 });
 
+/*
+    FOOTER COMPONENT
+*/
 Vue.component('app-footer', {
     template: `
     <footer>
@@ -64,6 +70,9 @@ Vue.component('app-footer', {
     `
 });
 
+/*
+    HOME COMPONENT
+*/
 const Home = Vue.component('home', {
    template: `
     <div class="row container-fluid">
@@ -90,8 +99,9 @@ const Home = Vue.component('home', {
     }
 });
 
-
-
+/*
+    REGISTER COMPONENT
+*/
 const register= Vue.component('register-form', {
     template: `
         <div class="fix-register">
@@ -99,14 +109,10 @@ const register= Vue.component('register-form', {
         <div class="layout border-style">
         <ul id="message" class="list">
             <li v-for="resp in error"class="list alert alert-danger">
-                {{resp.errors[0]}} <br>
-                {{resp.errors[1]}} <br>
-                {{resp.errors[2]}} <br>
-                {{resp.errors[3]}} <br>
-                {{resp.errors[4]}} <br>
-                {{resp.errors[5]}} <br>
-                {{resp.errors[6]}} <br>
-                {{resp.errors[7]}} <br>
+                {{resp.errors[0]}} <br>{{resp.errors[1]}} <br>
+                {{resp.errors[2]}} <br>{{resp.errors[3]}} <br>
+                {{resp.errors[4]}} <br>{{resp.errors[5]}} <br>
+                {{resp.errors[6]}} <br>{{resp.errors[7]}} <br>
             </li>
         </ul>
             <form id="registerForm"  @submit.prevent="registeruser" method="POST" enctype="multipart/form-data">
@@ -227,6 +233,9 @@ const register= Vue.component('register-form', {
     }
 });
 
+/*
+    LOGIN COMPONENT
+*/
 const loginform= Vue.component('login-form', {
     template: `
     <div class="fix-login">
@@ -237,6 +246,13 @@ const loginform= Vue.component('login-form', {
                     {{resp.errors[0]}} <br>
                     {{resp.errors[1]}} <br>
          </li>
+        </ul>
+        <ul id="message" class="list">
+        <div v-if ="messageFlag">
+          <div v-if="merror" class="list alert alert-danger">
+                    {{merror}}
+         </div>
+        </div>
         </ul>
         <form id="loginforms" @submit.prevent="loginuser" method="POST" >
             <div class="row">
@@ -267,7 +283,9 @@ const loginform= Vue.component('login-form', {
     data: function() {
        return {
            response: [],
-           error: []
+           error: [],
+           merror: [],
+           messageFlag: false,
        };
     },
     methods: {
@@ -291,7 +309,15 @@ const loginform= Vue.component('login-form', {
                 console.log(jsonResponse);
                 if(jsonResponse.errors){
                     self.error = jsonResponse.errors;
-                } else{
+                }
+                else if(jsonResponse.errorm)
+                {
+                    let emessage = jsonResponse.errorm;
+                    self.merror = emessage;
+                    self.messageFlag = true;
+                }
+                else
+                {
                     let jwt_token = jsonResponse.data.token;
                     let userid = jsonResponse.data.userid;
                     localStorage.setItem('token', jwt_token);
@@ -306,6 +332,9 @@ const loginform= Vue.component('login-form', {
     }
 });
 
+/*
+    PROFILE COMPONENT
+*/
 const profilepage= Vue.component('profile-form', {
     template: `
     <div>
@@ -599,6 +628,9 @@ const profilepage= Vue.component('profile-form', {
     }
 });
 
+/*
+    NEW POST COMPONENT
+*/
 const newpost= Vue.component('post-form', {
     template: `
     <div class="fix-register ">
@@ -665,7 +697,6 @@ const newpost= Vue.component('post-form', {
                 console.log(jsonResponse);
                 if(jsonResponse.message){
                     let message = jsonResponse.message;
-                    alert(message);
                     self.$router.push('/explore');
                 } else{
                     self.error = jsonResponse.errors;
@@ -678,17 +709,18 @@ const newpost= Vue.component('post-form', {
     }
 });
 
-
-
+/*
+    EXPLORE COMPONENT
+*/
 const explorepage= Vue.component('explore-form', {
     template: `
     <div>
         <div v-if="messageFlag" class="sidenav">
             <router-link class="btn btn-primary" to="/post/new">New Post</router-link>
         </div>
-        <div class="fix-register" v-else>
+        <div v-else>
             <router-link class="btn btn-primary post_div" to="/post/new">New Post</router-link>
-            <P class="alert alert-danger"><center> PLEASE LOGIN TO SEE EXPLORE VIEW!!!!!.</br> IF YOU DO NOT HAVE AN ACCOUNT CLICK REGISTER AND SIGN UP :-D </br> P.S: FROM YOUR CREATOR K.NELSON and O.CHRISTIE</center></P>
+            <P class="alert alert-danger"><center> PLEASE LOGIN TO SEE EXPLORE VIEW!!!!!.</br> P.S: FROM YOUR CREATOR K.NELSON and O.CHRISTIE</center></P>
         </div>
         <div class=" container-fluid fix-explore" v-if="output">
             <li v-for="resp in output"class="list">
@@ -698,13 +730,19 @@ const explorepage= Vue.component('explore-form', {
                             <p><img v-bind:src= "'/static/uploads/'+resp.pro_photo"style="width: 2rem; height: 2rem; padding: 3px; border-radius:100px;"/><router-link v-bind:to="'/users/' +resp.userid">{{resp.username}}</router-link></p>
     						<article class="item">
     							<header>
-    								<img v-bind:src= "'/static/uploads/'+resp.photo" style="width: 32.9rem; height: 20rem;"/>
+    								<img v-bind:src= "'/static/uploads/'+resp.photo" style="width: 50rem; height: 40rem;"/>
     							</header>
     							<p class="caption"><strong style="color:black;">{{resp.username}}</strong> {{resp.caption}}</p>
     						</article>
     						<section class="like like_8oo9w">
+    						<div v-if="resp.likeflag">
+                                <a class="like_eszkz like_l9yih nohover" @click="likepost(resp.postid)"><span class="span_8scx2 coreSpriteHeartOpen2">{{resp.likes.length}}Likes</span></a>
+                                <a class="like_eszkz like_et4ho nohover" href="#"><span class="span_8scx2">{{resp.created_on}}</span></a>
+                            </div>
+                            <div v-else>
                                 <a class="like_eszkz like_l9yih nohover" @click="likepost(resp.postid)"><span class="span_8scx2 coreSpriteHeartOpen">{{resp.likes.length}}Likes</span></a>
-                                <a class="like_eszkz like_et4ho nohover" href="#"><span class="span_8scx2 coreSpriteHeartOpen2">{{resp.created_on}}</span></a>
+                                <a class="like_eszkz like_et4ho nohover" href="#"><span class="span_8scx2">{{resp.created_on}}</span></a>
+                            </div>
                             </section>
     					</div>
 					</section>
@@ -803,7 +841,6 @@ const explorepage= Vue.component('explore-form', {
             console.log(jsonResponse);
             if(jsonResponse.message){
                 let message = jsonResponse.message;
-                alert(message);
                 self.trigger = true;
             }else if(jsonResponse.DB){
                 let DB = jsonResponse.DB;
@@ -819,7 +856,9 @@ const explorepage= Vue.component('explore-form', {
     }
 });
 
-
+/*
+    LOGOUT COMPONENT
+*/
 const logout= Vue.component('logout-form', {
     template: `<div></div>`,
     created: function() {
@@ -840,7 +879,6 @@ const logout= Vue.component('logout-form', {
             if(jsonResponse.message){
                 localStorage.removeItem('token');
                 localStorage.removeItem('userid');
-                alert (message);
                 self.$router.push('/');
                 
             }
@@ -853,6 +891,9 @@ const logout= Vue.component('logout-form', {
     }
 });
 
+/*
+    USE ROUTER
+*/
 Vue.use(VueRouter);
 
 // Define Routes
